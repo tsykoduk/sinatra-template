@@ -13,27 +13,34 @@ else
   end
 end
 
+
 namespace :db do
-  desc 'Auto-migrate the database (destroys data)'
-  task :migrate => :environment do
-    DataMapper.auto_migrate!
+  require 'active_record'
+  desc "Migrate the database through scripts in db/migrate"  
+    task(:migrate => :environment) do
+    ActiveRecord::Base.logger = Logger.new(STDOUT)
+    ActiveRecord::Migration.verbose = true
+    ActiveRecord::Migrator.migrate("db/migrate")
+  end  
+  
+  desc "setup in memory testing db"
+  task :setuptesting do
+     ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => 'db/testing.sqlite3')
+     ActiveRecord::Base.logger = Logger.new(STDOUT)
+     ActiveRecord::Migration.verbose = true
+     ActiveRecord::Migrator.migrate("db/migrate")  
   end
 
-  desc 'Auto-upgrade the database (preserves data)'
-  task :upgrade => :environment do
-    DataMapper.auto_upgrade!
+  task :environment do  
+   ActiveRecord::Base.establish_connection(YAML::load(File.open('db/database.yml')))  
   end
 end
 
 namespace :gems do
   desc 'Install required gems'
   task :install do
-    required_gems = %w{ sinatra rspec rack-test dm-core dm-validations
-                        dm-aggregates haml }
+    required_gems = %w{ sinatra rspec rack-test active_record sqlite3-ruby  }
     required_gems.each { |required_gem| system "sudo gem install #{required_gem}" }
   end
 end
 
-task :environment do
-  require 'environment'
-end
