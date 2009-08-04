@@ -1,7 +1,7 @@
 = Sinatra Application Template
 
 A base Sinatra application template. Just fork and build. Yay!
-Includes ActiveRecord, RSpec, and erv, all ready to go.
+Includes ActiveRecord, RSpec, and erb, all ready to go.
 
 == Configuration
 
@@ -13,7 +13,7 @@ Add your controller actions in <tt>application.rb</tt>. Views for these actions 
 
 Add your specs in <tt>spec</tt>; just require <tt>spec_helper.rb</tt> to pre-configure the test environment. A number of samples are provided (including a sample model, which can be removed). To run the specs:
 
-  rake spec
+  rake spec or just rake
 
 == Getting Started
 

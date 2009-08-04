@@ -1,0 +1,15 @@
+<p>Hey Nonny Nonny! It's <%= @time %> </p>
+
+
+<p><ul>
+	<% unless @user.nil? || @user.empty? %>
+     <% @user.each do |u| %>
+       <li>Hi <%= u.name %></li>
+     <% end %>
+   <% else %>
+       <li>No Users Yet</li>
+   <% end %>
+</ul></p>
+
+
+<p><small>by <%= SiteConfig.author %></small></p>

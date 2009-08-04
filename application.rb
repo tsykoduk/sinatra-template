@@ -2,6 +2,7 @@ require 'rubygems'
 require 'sinatra'
 require 'environment'
 
+
 configure do
   set :views, "#{File.dirname(__FILE__)}/views"
 end
@@ -18,5 +19,7 @@ end
 
 # root page
 get '/' do
+  @user = User.all()
+  @time = Time.now()
   erb :root
 end
