@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'environment'
+require 'erb'
 
 
 configure do
