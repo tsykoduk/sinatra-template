@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'active_record'
-require 'erb'
 require 'ostruct'
 require 'yaml'
 require 'sinatra' unless defined?(Sinatra)
